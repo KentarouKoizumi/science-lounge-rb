@@ -1,0 +1,33 @@
+<div id="online-status-wrapper">
+    <h2>開催状況</h2>
+    <p><%= @status_message %></p>
+</div>
+<h1>オンライン状況を変更</h1>
+<%= link_to("オンラインステータスを変更", "/change_status", {method: :post, class: "button"})%>
+<h1>時間延長</h1>
+<%= link_to("オンラインステータスを延長状態にする", "/extend", {method: :post, class: "button"}) %>
+<div class="online-log-wrapper">
+    <table>
+        <tr>
+            <th>オンラインステータス</th>
+            <th>開始日時</th>
+            <th>終了日時</th>
+            <th></th>
+        </tr>
+        <% @statuses.each do |status| %>
+            <tr>
+                <th><%= status.status %></th>
+                <th><%= status.created_at.strftime('%Y/%m/%d %H:%M:%S') %></th>
+                <th>
+                    <% if status.status == "offline" %>
+                        <%= status.updated_at.strftime('%Y/%m/%d %H:%M:%S') %>
+                    <% else %>
+                        <%= "進行中です" %>
+                    <% end %>
+                </th>
+                <th><%= link_to("削除", "/destroy_log/#{status.id}", {method: :post}) %></th>
+            </tr>
+        <% end %>
+    </table>
+</div>
+<%= link_to("ログアウト", "/logout", {method: :post})%>

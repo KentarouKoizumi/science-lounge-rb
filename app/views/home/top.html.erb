@@ -1,0 +1,35 @@
+<h1>信州大学物理学コースのサイエンスラウンジ！</h1>
+<p>「サイエンスラウンジ」では、学部四年生のアドバイザーに、オンラインで勉強の質問や相談ができます。</p>
+
+<div id="online-status-wrapper">
+    <h2>開催状況</h2>
+    <p><%= @status_message%></p>
+</div>
+
+<h2>開催場所：オンライン(Zoom)</h2>
+<div id="enter-button-wrapper">
+    <a href="" class="button"><span>月曜日or水曜日のミーティングに参加</span></a>
+    <a href="" class="button">木曜日のミーティングに参加</a>
+</div>
+<h2>開催日時</h2>
+<table>
+    <tr>
+        <td>月曜</td>
+        <td>16:40〜18:40</td>
+    </tr>
+    <tr>
+        <td>水曜</td>
+        <td>16:40〜18:40</td>
+    </tr>
+    <tr>
+        <td>木曜</td>
+        <td>15:00〜17:00</td>
+    </tr>
+</table>
+<p class="note">※終了時間は混雑状況などで延長する可能性があります。</p>
+<h3>「質問」等の予約受け付けを始めました！<br>予約をしておくと、スムーズに回答を受けることができます。予約は<a href="">こちら</a>から！</h3>
+<% if session[:user_id] == nil %>
+    <%= link_to("ログイン", "/login") %>
+<% else %>
+    <%= link_to("編集", "/edit") %>
+<% end %>

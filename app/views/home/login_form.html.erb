@@ -1,0 +1,19 @@
+<div id="login-main-wrapper">
+    <%= form_tag("/login") do %>
+    <h1>ログイン</h1>
+    <% if @error_message %>
+        <div class="form-error">
+            <%= @error_message %>
+        </div>
+    <% end %>
+    <div class="input_form">
+        <label>ID</label>
+        <input type="text" name="user_id" required value="<%= @user_id %>">
+    </div>
+    <div class="input_form">
+        <label>パスワード</label>
+        <input type="password" name="password" required value="<%= @password%>">
+    </div>
+    <input type="submit" value="ログイン">
+    <% end %>
+</div>
