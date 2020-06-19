@@ -8,8 +8,9 @@
 
 <h2>開催場所：オンライン(Zoom)</h2>
 <div id="enter-button-wrapper">
-    <a href="" class="button"><span>月曜日or水曜日のミーティングに参加</span></a>
-    <a href="" class="button">木曜日のミーティングに参加</a>
+    <% @links.each do |link| %>
+        <a href="<%= link.link %>" class="button"><%= link.label %></a>
+    <% end %>
 </div>
 <h2>開催日時</h2>
 <table>

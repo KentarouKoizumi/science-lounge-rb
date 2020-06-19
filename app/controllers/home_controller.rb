@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   before_action :check_online_status, {only:[:edit, :top]}
   
   def top
+    @links = ZoomLink.all
   end
 
   def login_form
@@ -15,6 +16,9 @@ class HomeController < ApplicationController
 
   def edit
     @statuses = Status.all.order(id: :desc)
+    @links = ZoomLink.all
+    @link_label = nil
+    @link_link = nil
   end
 
   def login
@@ -60,6 +64,33 @@ class HomeController < ApplicationController
     redirect_to("/edit")
   end
 
+  def add_link
+    link = ZoomLink.new(label: params[:link_label], link: params[:link])
+    if link.save
+      redirect_to("/edit")
+    else
+      flash[:notice] = "追加に失敗しました"
+      redirect_to("/edit")
+    end
+  end
+
+  def change_link
+    link = ZoomLink.find_by(id: params[:id])
+    link.label = params[:link_label]
+    link.link = params[:link]
+    if !link.save
+      flash[:notice] = "変更に失敗しました"
+    end
+    redirect_to("/edit")
+  end
+
+  def destroy_link
+    link = ZoomLink.find_by(id: params[:id])
+    link.destroy
+    redirect_to("/edit")
+  end
+
+  #before_action
   def authenticate_user
     if session[:user_id] == nil
       redirect_to("/")

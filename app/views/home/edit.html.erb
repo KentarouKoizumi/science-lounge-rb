@@ -6,6 +6,43 @@
 <%= link_to("オンラインステータスを変更", "/change_status", {method: :post, class: "button"})%>
 <h1>時間延長</h1>
 <%= link_to("オンラインステータスを延長状態にする", "/extend", {method: :post, class: "button"}) %>
+
+<h1>ボタンのリンク先</h1>
+<p class="form-error" ><%= flash[:notice] %></p>
+<div class="links_wrapper">
+    <table>
+        <tr>
+            <th>ラベル</th>
+            <th>リンク</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <% @links.each do |link| %>
+            <tr>
+                <%= form_tag("/change_link/#{link.id}") do %>
+                    <td><input type="text" value="<%= link.label %>" name="link_label"></td>
+                    <td><input type="text" value="<%= link.link %>" name="link" ></td>
+                    <td><input type="submit" value="変更" ></td>
+                    <td><%= link_to("削除" ,"/destroy_link/#{link.id}", {method: :post}) %></td>
+                <% end %>
+            </tr>
+        <% end %>
+        <tr>
+            <%= form_tag("/add_link") do %>
+                <td><input type="text" name="link_label"></td>
+                <td><input type="text" name="link"></td>
+                <td><input type="submit" value="追加"></td>
+                <td></td>
+            <% end %>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
 <div class="online-log-wrapper">
     <table>
         <tr>
@@ -16,16 +53,16 @@
         </tr>
         <% @statuses.each do |status| %>
             <tr>
-                <th><%= status.status %></th>
-                <th><%= status.created_at.strftime('%Y/%m/%d %H:%M:%S') %></th>
-                <th>
+                <td><%= status.status %></td>
+                <td><%= status.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+                <td>
                     <% if status.status == "offline" %>
                         <%= status.updated_at.strftime('%Y/%m/%d %H:%M:%S') %>
                     <% else %>
                         <%= "進行中です" %>
                     <% end %>
-                </th>
-                <th><%= link_to("削除", "/destroy_log/#{status.id}", {method: :post}) %></th>
+                </td>
+                <td><%= link_to("削除", "/destroy_log/#{status.id}", {method: :post}) %></td>
             </tr>
         <% end %>
     </table>

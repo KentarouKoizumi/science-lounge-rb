@@ -37,12 +37,13 @@ body {
 
 #enter-button-wrapper{
     text-align: center;
+    width: 100%;
 }
 
 .button{
     display: inline-block;
-    max-width: 300px;
-    width: 80%;
+    margin: 20px 50%;
+    width: 25%;
     background-color: #f9a03f;
     text-align: center;
     border-radius: 5px 5px 5px 5px;
@@ -86,4 +87,19 @@ input[type="submit"]{
 
 th{
     padding: 10px
+}
+
+.links_wrapper{
+    table{
+        margin: 0 auto;
+        width: 75%;
+    }
+    td{
+        width: 25%;
+    }
+    input[type="text"]{
+        width: 90%;
+        height: 1.5em;
+        font-size: 1.1em;
+    }
 }
