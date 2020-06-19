@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     if session[:user_id] != nil
       redirect_to("/edit")
     end
-    @user_id = nil
+    @user_name = nil
     @password = nil
   end
 
@@ -18,10 +18,9 @@ class HomeController < ApplicationController
   end
 
   def login
-    @user_id = params[:user_id]
-    @password = params[:password]
-    if params[:user_id] == "a" && params[:password] == "b"
-      session[:user_id] = @user_id
+    @user = User.find_by(name: params[:user_name])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
       redirect_to("/edit")
     else
       @error_message = "ログインに失敗しました"
